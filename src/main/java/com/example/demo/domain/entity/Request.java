@@ -17,9 +17,6 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(unique = true, nullable = false, length = 50)
-    private String number;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
     private RequestStatus status;
@@ -41,17 +38,14 @@ public class Request {
     @Column(name = "executed_at")
     private LocalDateTime executedAt;
 
-    // Навигационное поле: сотрудник, создавший заявку
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", nullable = false)
     private User employee;
 
-    // Навигационное поле: подразделение
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
-    // Позиции заявки
     @OneToMany(mappedBy = "request", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<RequestItem> items = new ArrayList<>();
 }

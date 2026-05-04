@@ -4,6 +4,4 @@ package com.example.demo.domain.enums;
 public enum MovementType {
     RECEIPT,         // приход
     CONSUMPTION,     // расход
-    ADJUSTMENT,      // корректировка
-    WRITEOFF         // списание
 }

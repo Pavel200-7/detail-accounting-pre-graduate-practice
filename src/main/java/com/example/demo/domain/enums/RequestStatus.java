@@ -1,6 +1,5 @@
 package com.example.demo.domain.enums;
 
-// Статусы заявки
 public enum RequestStatus {
     DRAFT,           // черновик
     PENDING,         // на согласовании

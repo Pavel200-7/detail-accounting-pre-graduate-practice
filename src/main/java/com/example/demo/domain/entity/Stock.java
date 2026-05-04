@@ -24,7 +24,6 @@ public class Stock {
     @Column(name = "last_updated")
     private LocalDateTime lastUpdated;
 
-    // Навигационное поле: деталь (One-to-One)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "part_id", nullable = false, unique = true)
     private Part part;

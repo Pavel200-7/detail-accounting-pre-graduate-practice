@@ -31,20 +31,16 @@ public class Movement {
     @Column(name = "document_type", length = 50)
     private String documentType;
 
-    @Column(name = "document_id")
-    private String documentId;
-
     @Column(name = "performed_at")
     private LocalDateTime performedAt;
 
+    @Column(length = 255)
     private String comment;
 
-    // Навигационное поле: деталь
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "part_id", nullable = false)
     private Part part;
 
-    // Навигационное поле: пользователь, выполнивший операцию
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "performed_by")
     private User performedBy;

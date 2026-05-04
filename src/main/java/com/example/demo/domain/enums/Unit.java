@@ -1,6 +1,5 @@
 package com.example.demo.domain.enums;
 
-// Единицы измерения
 public enum Unit {
     PCS,             // штуки
     KG,              // килограммы

@@ -23,22 +23,20 @@ public class Part {
     private String name;
 
     @Column(unique = true, length = 100)
-    private String sku; // артикул, уникальный код
+    private String sku;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private Unit unit; // единица измерения
+    private Unit unit;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 50)
     private PartCategory category;
 
-    @Column(name = "min_stock")
-    private Integer minStock = 0; // минимальный остаток для оповещения
-
     @Column(precision = 12, scale = 2)
     private BigDecimal price;
 
+    @Column(length = 255)
     private String description;
 
     @Column(name = "created_at")
@@ -47,17 +45,12 @@ public class Part {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Навигационное поле: остаток на складе (One-to-One)
     @OneToOne(mappedBy = "part", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Stock stock;
 
-    // Навигационное поле: позиции в заявках
     @OneToMany(mappedBy = "part", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RequestItem> requestItems = new ArrayList<>();
 
-    // Навигационное поле: движения
     @OneToMany(mappedBy = "part", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Movement> movements = new ArrayList<>();
-
-    // Геттеры, сеттеры, equals, hashCode
 }

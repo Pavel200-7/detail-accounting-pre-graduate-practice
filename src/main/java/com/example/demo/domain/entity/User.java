@@ -1,6 +1,5 @@
 package com.example.demo.domain.entity;
 
-import com.example.demo.domain.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,21 +17,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(unique = true, nullable = false, length = 100)
-    private String login;
-
-    @Column(nullable = false)
-    private String passwordHash;
-
     @Column(name = "full_name", nullable = false, length = 255)
     private String fullName;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
-    private UserRole role;
-
-    @Column(name = "is_active")
-    private Boolean isActive = true;
 
     private String email;
     private String phone;
@@ -47,6 +33,7 @@ public class User {
 
     // Созданные заявки
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OrderBy("createdAt DESC")
     private List<Request> createdRequests = new ArrayList<>();
 
     // Выполненные движения

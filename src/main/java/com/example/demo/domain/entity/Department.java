@@ -18,25 +18,22 @@ public class Department {
     @Column(nullable = false, length = 255)
     private String name;
 
-    // Самореференция для древовидной структуры
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Department parent;
 
-    @Column(length = 50)
+    @Column(length = 16)
     private String code;
 
+    @Column(length = 255)
     private String description;
 
-    // Дочерние подразделения
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Department> children = new ArrayList<>();
 
-    // Сотрудники подразделения
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<User> users = new ArrayList<>();
 
-    // Заявки подразделения
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Request> requests = new ArrayList<>();
 }
