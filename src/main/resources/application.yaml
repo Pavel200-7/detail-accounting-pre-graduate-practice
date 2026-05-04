@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: demo
+
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operationsSorter: method      # сортировка по HTTP методу (GET, POST...)
+    tagsSorter: alpha             # сортировка тегов по алфавиту
+    tryItOutEnabled: true         # кнопка "Try it out" активна по умолчанию
+    filter: true                  # поле поиска по API
+    doc-expansion: none           # сворачиваем все разделы при загрузке
+    display-request-duration: true # показывать длительность запроса
+  show-actuator: false
+  writer-with-default-prettify: true
+
+server:
+  port: 8085
