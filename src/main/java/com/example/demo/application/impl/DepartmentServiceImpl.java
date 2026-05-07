@@ -13,6 +13,7 @@ import com.example.demo.presentation.dto.request.UpdateDepartmentDto;
 import com.example.demo.presentation.dto.response.DepartmentResponseDto;
 import com.example.demo.presentation.dto.response.DepartmentTreeDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository departmentRepository;

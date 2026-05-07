@@ -3,8 +3,13 @@ package com.example.demo.presentation.dto.request;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class CreateUserDto {
+
+    @NotNull(message = "Id обязателен")
+    private UUID id;  // внешний ID из Keycloak
 
     @NotBlank(message = "FullName не может быть пустым")
     @Size(min = 3, max = 255, message = "FullName должен быть от 3 до 255 символов")

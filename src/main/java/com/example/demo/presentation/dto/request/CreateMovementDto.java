@@ -20,7 +20,7 @@ public class CreateMovementDto {
     private Integer quantity;
 
     @Size(max = 50, message = "DocumentType не длиннее 50 символов")
-    @Pattern(regexp = "^[a-zA-Z0-9\\s\\-]*$",
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я0-9\\s\\-]*$",
             message = "DocumentType может содержать только буквы, цифры, пробелы и дефисы")
     private String documentType;
 

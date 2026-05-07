@@ -33,6 +33,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponseDto createUser(CreateUserDto dto) {
+        if (userRepository.existsById(dto.getId())) {
+            User existingUser = userRepository.findById(dto.getId()).get();
+            return userMapper.toResponseDto(existingUser);
+        }
+
         if (userRepository.existsByEmail(dto.getEmail())) {
             throw new BusinessRuleException(
                     String.format("Пользователь с email '%s' уже существует", dto.getEmail())
@@ -61,8 +66,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Request> getRequestsByUserId(UUID id) {
-        userRepository.findById(id)
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User", id));
+
         return requestRepository.findByEmployeeId(id);
     }
 
@@ -71,6 +77,7 @@ public class UserServiceImpl implements UserService {
     public UserResponseDto setUserDepartment(SetUserDepartmentDto dto) {
         User user = userRepository.findById(dto.getId())
                 .orElseThrow(() -> new EntityNotFoundException("User", dto.getId()));
+
         Department department = departmentRepository.findById(dto.getDepartmentId())
                 .orElseThrow(() -> new EntityNotFoundException("Department", dto.getDepartmentId()));
 

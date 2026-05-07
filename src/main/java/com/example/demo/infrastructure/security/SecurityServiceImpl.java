@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class SecurityServiceImpl implements SecurityService {
@@ -49,13 +50,15 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public List<String> getCurrentRoles() {
         return getCurrentJwt().getClaimAsStringList(
-                Claims.CURRENT_USER_ROLES.name);
+                Claims.CURRENT_USER_ROLES.name)
+                .stream().map(String::toLowerCase)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     @Override
     public boolean hasRole(String role) {
         List<String> roles = getCurrentRoles();
-        return roles != null && roles.contains(role);
+        return roles != null && roles.contains(role.toLowerCase());
     }
 
     @Override

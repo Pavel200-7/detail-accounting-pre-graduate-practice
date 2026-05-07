@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
-    UserResponseDto createUser(CreateUserDto dto);
+    UserResponseDto createUser(CreateUserDto dto);  // теперь принимает id в DTO
     UserResponseDto getUserById(UUID id);
     List<Request> getRequestsByUserId(UUID id);
     UserResponseDto setUserDepartment(SetUserDepartmentDto dto);
